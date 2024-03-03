@@ -1,0 +1,147 @@
+@startuml
+abstract class Karakter{
+# Szoba : hely
++ void : felvetel(Targy : targy)
++ void : szobabaLepes(Szoba : szoba)
++ void : ajulas()
+}
+
+class Hallgato {
+- Zseb : zseb
++ void : felvetel(Targy : targy)
++ void : ajulas()
++ void : kibukas()
++ void : letesz(Targy : targy)
++ void : ellenorzes(List<Targy> OktatoElleni, List<Targy> SzobaElleni)
+}
+
+class Oktato {
++ void : felvetel(Targy : targy)
++ void : ajulas()
+}
+
+class Zseb{
+- List<Targy> : zseb
++ void : hozzaad(Targy : targy)
++ void : torol(Targy : targy)
++ void : kidob(Targy : targy)
++ void : parositas()
+}
+
+class GameModel{
+- List<Szoba> szobak
++ void osszeolvadas(Szoba : szoba1, szoba2)
++ void osztodss(Szoba : szoba)
+}
+
+interface Gazos{
++ void : ajulas()
+}
+interface Atkozott{
++ void ajtovaltozas()
+}
+
+class Szoba{
+- int : befogadokepesseg
+- int : azonosito
+- List<Szoba> : szomszedok
+- List<Targy> : targyak
+- List<Karakter> : jelenlevok
++ void : ujbelepo(Karakter : karakter)
++ void : kilepo(Karakter : karakter)
++ void : ujtargy(Targyak : targy)
++ void : targyminusz(Targy : targy)
++ List<Targy> : szuksegesOktatoElleniTargyak()
++ List<Targy> : szuksegesSzobaElleniTargyak()
+}
+
+class GazosSzoba{
++ void : ajulas()
+}
+
+class AtkozottSzoba{
++ void : ajtovaltozas()
+}
+
+
+class GazosAtkozottSzoba{
++ void : ajulas()
++ void : ajtovaltozas()
+}
+
+class LogarLec{
++ void : hasznal()
+}
+
+class Maszk{
+- int : HP
++ void hasznal()
+}
+
+class TVSZ{
+- int : HP
++ void hasznal()
+}
+
+class SorosPohar{
+- int HP
++ void hasznal()
+}
+
+class TablaTorloRongy{
+- int HP
++ void hasznal()
+}
+
+class KaposztasCamambert{
++ Szoba : elgazosit()
++ void hasznal()
+}
+
+class Tranzisztor{
+- int : azonosito
+- Tranzisztor : parja
++ void : kikapcsol()
++ void hasznal()
+}
+
+abstract Targy{
+# Szoba : hely
+# bool : felvett
++ void : poziciovaltozas(Szoba : szoba)
++ void : hasznal()
++ void : letesz()
+}
+
+GazosSzoba --|> Gazos
+AtkozottSzoba --|> Atkozott
+GazosAtkozottSzoba --|> Gazos
+GazosAtkozottSzoba --|> Atkozott
+
+
+Karakter <|-- Hallgato
+Karakter <|-- Oktato
+
+Szoba <|-- GazosSzoba
+Szoba <|-- AtkozottSzoba
+Szoba <|-- GazosAtkozottSzoba
+
+
+Targy <|-- LogarLec
+Targy <|-- Maszk
+Targy <|-- TablaTorloRongy
+Targy <|-- TVSZ
+Targy <|-- KaposztasCamambert
+Targy <|-- SorosPohar
+Targy <|-- Tranzisztor
+
+GameModel *- Szoba
+
+Szoba <-> Karakter
+Szoba *-> Targy
+
+Zseb *- Targy
+Hallgato *- Zseb
+
+
+@enduml
