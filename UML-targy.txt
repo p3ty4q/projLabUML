@@ -1,0 +1,58 @@
+@startuml
+class LogarLec{
++ void : hasznal()
+}
+
+class Maszk{
+- int : HP
++ void hasznal()
+}
+
+class TVSZ{
+- int : HP
++ void hasznal()
+}
+
+class SorosPohar{
+- int HP
++ void hasznal()
+}
+
+class TablaTorloRongy{
+- int HP
++ void hasznal()
+}
+
+class KaposztasCamambert{
++ Szoba : elgazosit()
++ void hasznal()
+}
+
+class Tranzisztor{
+- int : azonosito
+- Tranzisztor : parja
++ void : kikapcsol()
++ void hasznal()
+}
+
+abstract Targy{
+# Szoba : hely
+# bool : felvett
++ void : poziciovaltozas(Szoba : szoba)
++ void : hasznal()
++ void : letesz()
+}
+
+Targy <|-- LogarLec
+Targy <|-- Maszk
+Targy <|-- TablaTorloRongy
+Targy <|-- TVSZ
+Targy <|-- KaposztasCamambert
+Targy <|-- SorosPohar
+Targy <|-- Tranzisztor
+
+Szoba *-> Targy
+
+Zseb *- Targy
+
+@enduml

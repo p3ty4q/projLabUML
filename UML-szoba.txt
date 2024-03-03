@@ -1,0 +1,56 @@
+@startuml
+class GameModel{
+- List<Szoba> szobak
++ void osszeolvadas(Szoba : szoba1, szoba2)
++ void osztodss(Szoba : szoba)
+}
+
+interface Gazos{
++ void : ajulas()
+}
+interface Atkozott{
++ void ajtovaltozas()
+}
+
+class Szoba{
+- int : befogadokepesseg
+- int : azonosito
+- List<Szoba> : szomszedok
+- List<Targy> : targyak
+- List<Karakter> : jelenlevok
++ void : ujbelepo(Karakter : karakter)
++ void : kilepo(Karakter : karakter)
++ void : ujtargy(Targyak : targy)
++ void : targyminusz(Targy : targy)
++ List<Targy> : szuksegesOktatoElleniTargyak()
++ List<Targy> : szuksegesSzobaElleniTargyak()
+}
+
+class GazosSzoba{
++ void : ajulas()
+}
+
+class AtkozottSzoba{
++ void : ajtovaltozas()
+}
+
+class GazosAtkozottSzoba{
++ void : ajulas()
++ void : ajtovaltozas()
+}
+
+GazosSzoba --|> Gazos
+AtkozottSzoba --|> Atkozott
+GazosAtkozottSzoba --|> Gazos
+GazosAtkozottSzoba --|> Atkozott
+
+Szoba <|-- GazosSzoba
+Szoba <|-- AtkozottSzoba
+Szoba <|-- GazosAtkozottSzoba
+
+GameModel *- Szoba
+
+Szoba <-> Karakter
+Szoba *-> Targy
+
+@enduml
